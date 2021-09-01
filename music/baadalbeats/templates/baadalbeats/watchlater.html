@@ -1,0 +1,38 @@
+{%extends 'baadalbeats/basic.html' %}
+{%block title %} All songs {%endblock%}
+
+{%block body%}
+
+<h1 style="color: red ; text-align : center;">Listen Later</h1>
+<div class="container">
+
+{% if song|length < 1%}
+<h1 style="text-align: center;"> You Dont have any songs in Listen Later</h1>
+
+{% endif %}
+    
+{%for i in song%}
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="/media/{{i.image}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Name : {{i.Name}}</h5>
+          <p class="card-text">Genre :{{i.tags}} </p>
+          <p class="card-text">Album : {{i.album}} </p>
+          <a href="/baadalbeats/songs/{{i.song_id}}"><button class ="btn btn-outline-danger">Listen song</button></a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{%endfor%}
+</div>
+</div>
+
+{%endblock%}

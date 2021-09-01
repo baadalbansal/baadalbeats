@@ -1,0 +1,39 @@
+{%extends 'baadalbeats/basic.html' %}
+{%block title %} All songs {%endblock%}
+
+{%block body%}
+<div class='container'>
+    
+<div style="padding-top: 3%; padding-bottom: 2%; font-size: 150%; color: gray;">
+    Your Search Result {{query}} :
+</div>   
+
+{%for i in songs %}
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="/media/{{i.image}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Name : {{i.Name}}</h5>
+          <p class="card-text">Genre :{{i.tags}} </p>
+          <p class="card-text">Album : {{i.album}} </p>
+
+          {%if user.is_authenticated%}
+          
+          <form action="/baadalbeats/history" method="POST"> {% csrf_token %}
+            <input type="hidden" name = music_id value = "{{i.song_id}}"> 
+            <a href="/baadalbeats/songs/{{i.song_id}}"><button class ="btn btn-outline-danger">Listen song</button></a>
+          </form>  
+          {% else %} 
+          <a href="/baadalbeats/songs/{{i.song_id}}"><button class ="btn btn-outline-danger">Listen song</button></a>
+          {%endif%} 
+        </div>
+      </div>
+    </div>
+  </div>
+{%endfor%}
+</div>
+{%endblock%}
